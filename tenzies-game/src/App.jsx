@@ -14,7 +14,6 @@ function App() {
     const allSameValue = dice.every(die => die.value === firstValue)
     if (allHeld && allSameValue) {
       setTenzies(true)
-      console.log("you won")
     }
   }, [dice])
 
@@ -36,12 +35,18 @@ function App() {
   }
 
 
+
   function rollDice() {
-    setDice(oldDice => oldDice.map(die => {
-      return die.isHeld ?
-        die :
-        generateNewDie()
-    }))
+    if (!tenzies) {
+      setDice(oldDice => oldDice.map(die => {
+        return die.isHeld ?
+          die :
+          generateNewDie()
+      }))
+    } else {
+      setTenzies(false)
+      setDice(allNewDice())
+    }
   }
 
 
@@ -64,6 +69,7 @@ function App() {
   return (
     <div>
       <main>
+        {tenzies && <Confetti />}
         <h1 className="title" >Tenzies</h1>
         <p className="instructions">Roll until all dice are the same.
           Click each die to freeze it at its current value between rolls.</p>
