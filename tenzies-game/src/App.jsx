@@ -28,12 +28,11 @@ function App() {
 
   function allNewDice() {
     const newDice = []
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 15; i++) {
       newDice.push(generateNewDie())
     }
     return newDice
   }
-
 
 
   function rollDice() {
